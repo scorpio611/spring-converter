@@ -7,8 +7,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class Converter {
     @GetMapping("/")
-    public String index() {
-        return "index";
+    public ModelAndView index() {
+        return new ModelAndView("index");
     }
 
     @PostMapping("/convert")
