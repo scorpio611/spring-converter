@@ -1,14 +1,23 @@
 package controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class Converter {
     @GetMapping("/")
-    public String converter(@RequestParam float number, Model model){
-        model.addAttribute("number",number*23000);
-        return "result";
+    public String index() {
+        return "index";
+    }
+
+    @PostMapping("/convert")
+    public ModelAndView convert(@RequestParam Float rate, Float usd) {
+        ModelAndView modelAndView = new ModelAndView("convert");
+        modelAndView.addObject("rate", rate);
+        modelAndView.addObject("usd", usd);
+        float vnd = rate*usd;
+        modelAndView.addObject("vnd", vnd);
+        return modelAndView;
     }
 }
